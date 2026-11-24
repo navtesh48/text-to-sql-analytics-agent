@@ -2,7 +2,7 @@
 
 A chat interface over a database. Ask "which pond had the lowest yield in October?" and an agent writes SQL, validates it, runs it on a read-only connection, fixes its own errors, and returns a plain-English answer, the SQL, a table and a chart. The bundled database is a generated algae-farm dataset so it runs out of the box; point it at your own schema by editing `semantic.yml`.
 
-> **Provenance:** a clean reimplementation of a project I originally built; the original code was unavailable, so this was rebuilt from the original design. The 21 tests pass, including the agent loop driven by a scripted fake model. I have **not** yet run it against the live Claude API, so no execution-accuracy number is reported. `eval/run_eval.py` is included to measure it.
+> **Provenance:** a clean reimplementation of a project I originally built; the original code was unavailable, so this was rebuilt from the original design. The 22 tests pass, including the agent loop driven by a scripted fake model. I have **not** yet run it against the live Claude API, so no execution-accuracy number is reported. `eval/run_eval.py` is included to measure it.
 
 ## Three independent safety layers
 1. **Validator** (`validate.py`): `sqlglot` parses the query. Exactly one `SELECT`/`UNION` over whitelisted tables, no write/DDL/PRAGMA nodes, and a `LIMIT` is added when missing.
