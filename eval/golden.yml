@@ -1,0 +1,11 @@
+# Extend to ~20 cases; each pairs a question with a gold query.
+- q: How many ponds are in the Greenhouse?
+  sql: SELECT COUNT(*) FROM ponds WHERE location = 'Greenhouse'
+- q: What was the total dry mass harvested in October 2025, in grams?
+  sql: SELECT SUM(dry_mass_g) FROM harvests WHERE strftime('%Y-%m', harvest_date) = '2025-10'
+- q: Which pond has the highest average pH?
+  sql: SELECT pond_id FROM daily GROUP BY pond_id ORDER BY AVG(ph) DESC LIMIT 1
+- q: What is the average temperature in each location?
+  sql: SELECT p.location, AVG(d.temp_c) FROM daily d JOIN ponds p ON p.id = d.pond_id GROUP BY p.location
+- q: Which strain has the most ponds?
+  sql: SELECT s.name FROM ponds p JOIN strains s ON s.id = p.strain_id GROUP BY s.name ORDER BY COUNT(*) DESC LIMIT 1
