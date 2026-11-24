@@ -1,0 +1,12 @@
+tables:
+  strains: {description: One row per algae strain., columns: {id: primary key, name: species name, optimum_temp_c: best growth temperature in Celsius}}
+  ponds: {description: One row per cultivation pond or reactor., columns: {id: primary key, name: label such as 'Pond 03', strain_id: foreign key to strains.id, volume_l: working volume in liters, location: North field | South field | Greenhouse}}
+  harvests: {description: One row per harvest event., columns: {id: primary key, pond_id: foreign key to ponds.id, harvest_date: 'YYYY-MM-DD', dry_mass_g: dry biomass harvested in grams}}
+  daily: {description: One row per pond per day of sensor summaries., columns: {date: 'YYYY-MM-DD', pond_id: foreign key to ponds.id, temp_c: mean temperature, ph: mean pH, par_mean: mean light in umol/m2/s, od750: optical density at 750 nm (proxy for cell density)}}
+metrics:
+  yield_g_per_l: 'SUM(harvests.dry_mass_g) / ponds.volume_l, grouped by pond. Use for yield comparisons.'
+  month: "strftime('%Y-%m', date_column) in SQLite"
+notes:
+  - Dates are text in ISO format; use strftime for month or year filters.
+  - Dialect is SQLite. No ILIKE, use LIKE. No DATE_TRUNC.
+  - Year of data is 2025 only.

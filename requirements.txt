@@ -1,0 +1,9 @@
+sqlglot
+pandas
+numpy
+plotly
+streamlit
+anthropic
+pyyaml
+python-dotenv
+pytest
