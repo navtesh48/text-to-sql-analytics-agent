@@ -22,7 +22,7 @@ def build(path='data/sample.db', seed=7):
     for pid, _, sid, vol, loc in ponds:
         od = 0.2
         for d in days:
-            season = np.sin(2 * np.pi * (d.dayofyear - 80) / 365)
+            season = np.sin(2 * np.pi * (d.day_of_year - 80) / 365)
             temp = 24 + 9 * season + rng.normal(0, 1.5) + (3 if loc == 'Greenhouse' else 0)
             par = max(0, 900 + 600 * season + rng.normal(0, 120))
             opt = strains[sid - 1][2]
